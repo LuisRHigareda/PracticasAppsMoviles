@@ -104,4 +104,80 @@
         app:layout_constraintStart_toStartOf="@id/card"
         app:layout_constraintTop_toTopOf="@id/card" />
 
+    <!-- Altura -->
+
+    <TextView
+        android:id="@+id/lblAltura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:text="Altura"
+        android:textColor="@color/red_label"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/card"
+        app:layout_constraintTop_toBottomOf="@id/chipType" />
+
+    <!-- Peso -->
+
+    <TextView
+        android:id="@+id/txtAltura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="0,4m"
+        android:textColor="@color/text_dark"
+        android:textSize="30sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/lblAltura"
+        app:layout_constraintStart_toEndOf="@id/lblAltura" />
+
+    <TextView
+        android:id="@+id/lblPeso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:text="Peso"
+        android:textColor="@color/red_label"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/card"
+        app:layout_constraintTop_toBottomOf="@id/lblAltura" />
+
+    <TextView
+        android:id="@+id/txtPeso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="6,0kg"
+        android:textColor="@color/text_dark"
+        android:textSize="30sp"
+        android:layout_marginStart="26dp"
+        app:layout_constraintStart_toEndOf="@id/lblPeso"
+        app:layout_constraintBaseline_toBaselineOf="@id/lblPeso" />
+
+    <!-- Habilidad -->
+    <TextView
+        android:id="@+id/lblHabilidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Habilidad"
+        android:textColor="@color/red_label"
+        android:textStyle="bold"
+        android:textSize="26sp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="44dp"
+        app:layout_constraintEnd_toEndOf="@id/card"
+        app:layout_constraintTop_toBottomOf="@id/chipType" />
+
+    <TextView
+        android:id="@+id/txtHabilidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Elec. Estática"
+        android:textColor="@color/text_dark"
+        android:textSize="30sp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/lblHabilidad"
+        app:layout_constraintStart_toStartOf="@id/lblHabilidad" />
 </androidx.constraintlayout.widget.ConstraintLayout>
