@@ -89,5 +89,19 @@
         app:layout_constraintStart_toStartOf="@id/card"
         app:layout_constraintEnd_toEndOf="@id/card" />
 
+    <!-- Chip tipo (Eléctrico) -->
+    <TextView
+        android:id="@+id/chipType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:background="@drawable/bg_chip"
+        android:text="Eléctrico"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/card"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@id/card"
+        app:layout_constraintTop_toTopOf="@id/card" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
