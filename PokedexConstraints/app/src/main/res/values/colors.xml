@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="yellow_bg">#E3C21B</color>
+    <color name="red_label">#D32F2F</color>
+    <color name="text_dark">#222222</color>
+    <color name="text_gray">#666666</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="chip_yellow">#F5D547</color>
+
+</resources>
