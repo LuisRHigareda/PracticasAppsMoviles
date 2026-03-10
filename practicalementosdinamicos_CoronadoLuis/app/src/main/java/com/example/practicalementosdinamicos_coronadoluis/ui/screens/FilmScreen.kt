@@ -20,7 +20,7 @@ import com.example.practicalementosdinamicos_coronadoluis.ui.components.FilmCard
 import com.example.practicalementosdinamicos_coronadoluis.ui.theme.Practicalementosdinamicos_CoronadoLuisTheme
 
 @Composable
-fun FilmsScreen() {
+fun FilmScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -48,6 +48,6 @@ fun FilmsScreen() {
 @Composable
 fun FilmsScreenPreview() {
     Practicalementosdinamicos_CoronadoLuisTheme {
-        FilmsScreen()
+        FilmScreen()
     }
 }

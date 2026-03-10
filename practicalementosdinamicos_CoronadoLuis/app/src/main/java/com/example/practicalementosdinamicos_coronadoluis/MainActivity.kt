@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.practicalementosdinamicos_coronadoluis.ui.screens.LoginScreen
+import com.example.practicalementosdinamicos_coronadoluis.navigation.AppNavigation
 import com.example.practicalementosdinamicos_coronadoluis.ui.theme.Practicalementosdinamicos_CoronadoLuisTheme
 
 class MainActivity : ComponentActivity() {
@@ -14,7 +14,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             Practicalementosdinamicos_CoronadoLuisTheme {
-                LoginScreen()
+                AppNavigation()
             }
         }
     }
