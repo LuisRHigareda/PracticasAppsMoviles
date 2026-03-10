@@ -1,6 +1,7 @@
 package com.example.practicalementosdinamicos_coronadoluis.ui.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,9 +29,14 @@ import com.example.practicalementosdinamicos_coronadoluis.model.Film
 import com.example.practicalementosdinamicos_coronadoluis.ui.theme.Practicalementosdinamicos_CoronadoLuisTheme
 
 @Composable
-fun FilmCard(film: Film) {
+fun FilmCard(
+    film: Film,
+    onClick: () -> Unit = {}
+) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() },
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         colors = CardDefaults.cardColors(
@@ -83,6 +89,10 @@ fun FilmCardPreview() {
                 id = 1,
                 title = "Titanic",
                 description = "Romantic movie",
+                synopsis = "Jack y Rose se conocen a bordo del Titanic.",
+                duration = "3h 14m",
+                actors = "Leonardo DiCaprio, Kate Winslet",
+                year = 1997,
                 imageRes = R.drawable.titanic
             )
         )

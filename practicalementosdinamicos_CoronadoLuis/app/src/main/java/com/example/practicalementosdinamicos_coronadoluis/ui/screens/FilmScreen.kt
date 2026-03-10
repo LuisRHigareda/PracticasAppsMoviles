@@ -20,7 +20,9 @@ import com.example.practicalementosdinamicos_coronadoluis.ui.components.FilmCard
 import com.example.practicalementosdinamicos_coronadoluis.ui.theme.Practicalementosdinamicos_CoronadoLuisTheme
 
 @Composable
-fun FilmScreen() {
+fun FilmsScreen(
+    onFilmClick: (Int) -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -38,7 +40,12 @@ fun FilmScreen() {
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             items(sampleFilms) { film ->
-                FilmCard(film = film)
+                FilmCard(
+                    film = film,
+                    onClick = {
+                        onFilmClick(film.id)
+                    }
+                )
             }
         }
     }
@@ -48,6 +55,6 @@ fun FilmScreen() {
 @Composable
 fun FilmsScreenPreview() {
     Practicalementosdinamicos_CoronadoLuisTheme {
-        FilmScreen()
+        FilmsScreen()
     }
 }
