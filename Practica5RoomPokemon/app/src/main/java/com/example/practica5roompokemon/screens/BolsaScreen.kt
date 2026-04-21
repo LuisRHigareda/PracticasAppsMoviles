@@ -1,9 +1,12 @@
 package com.example.practica5roompokemon.screens
 
+import android.content.Context
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,29 +24,48 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.practica5roompokemon.data.Pokemon
+import com.example.practica5roompokemon.data.PokemonCatalog
+import com.example.practica5roompokemon.data.PokemonCatalogEntry
 import com.example.practica5roompokemon.viewmodel.PokemonViewModel
 import kotlin.math.roundToInt
+
+private fun resolvePokemonImageResId(
+    context: Context,
+    pokemon: Pokemon
+): Int {
+    val entry: PokemonCatalogEntry = PokemonCatalog.findByName(pokemon.name) ?: return 0
+    val candidates = PokemonCatalog.getPossibleImageNames(entry)
+
+    for (name in candidates) {
+        val resId = context.resources.getIdentifier(name, "drawable", context.packageName)
+        if (resId != 0) return resId
+    }
+
+    return 0
+}
 
 @Composable
 fun BolsaScreen(viewModel: PokemonViewModel) {
@@ -108,7 +130,8 @@ fun BolsaScreen(viewModel: PokemonViewModel) {
 
         item {
             ElevatedCard(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(24.dp)
             ) {
                 androidx.compose.foundation.layout.Column(
                     modifier = Modifier.padding(16.dp),
@@ -139,7 +162,8 @@ fun BolsaScreen(viewModel: PokemonViewModel) {
         if (pokemonList.isEmpty()) {
             item {
                 ElevatedCard(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(24.dp)
                 ) {
                     androidx.compose.foundation.layout.Column(
                         modifier = Modifier.padding(20.dp),
@@ -204,32 +228,46 @@ private fun PokemonCard(
     onDeleteClick: () -> Unit
 ) {
     val typeColor = pokemonTypeColor(pokemon.type)
+    val context = LocalContext.current
+
+    val imageResId = remember(pokemon.name) {
+        resolvePokemonImageResId(context, pokemon)
+    }
 
     ElevatedCard(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(24.dp)
     ) {
         androidx.compose.foundation.layout.Column(
             modifier = Modifier.padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
-            androidx.compose.foundation.layout.Row(
+            Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Box(
-                    modifier = Modifier
-                        .size(58.dp)
-                        .clip(CircleShape)
-                        .background(typeColor.copy(alpha = 0.18f)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = pokemon.name.take(1).uppercase(),
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = typeColor
+                if (imageResId != 0) {
+                    Image(
+                        painter = painterResource(id = imageResId),
+                        contentDescription = pokemon.name,
+                        modifier = Modifier.size(72.dp)
                     )
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .size(58.dp)
+                            .clip(CircleShape)
+                            .background(typeColor.copy(alpha = 0.18f)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = pokemon.name.take(1).uppercase(),
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            color = typeColor
+                        )
+                    }
                 }
 
                 androidx.compose.foundation.layout.Column(
@@ -242,7 +280,7 @@ private fun PokemonCard(
                         fontWeight = FontWeight.Bold
                     )
 
-                    androidx.compose.foundation.layout.Row(
+                    Row(
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Surface(
@@ -271,7 +309,7 @@ private fun PokemonCard(
                 }
             }
 
-            androidx.compose.foundation.layout.Row(
+            Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {

@@ -215,7 +215,7 @@ object PokemonCatalog {
         val normalizedName = normalizeResourceName(entry.name)
 
         return listOf(
-            "p$padded3",          
+            "p$padded3",
             "p$padded4",
             "p$raw",
             "pokemon_$padded3",
