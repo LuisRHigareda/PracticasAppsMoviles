@@ -1,5 +1,6 @@
 package com.example.practica5roompokemon.viewmodel
 
+import com.example.practica5roompokemon.data.PokemonCatalogEntry
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.practica5roompokemon.data.Pokemon
@@ -129,6 +130,24 @@ class PokemonViewModel(
     }
 
     private fun emitMessage(message: String) {
+        viewModelScope.launch {
+            _messages.emit(message)
+        }
+    }
+    fun captureResolvedPokemon(entry: PokemonCatalogEntry, level: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertPokemon(
+                Pokemon(
+                    name = entry.name,
+                    type = entry.type,
+                    level = level
+                )
+            )
+            _messages.emit("${entry.name} fue capturado.")
+        }
+    }
+
+    fun showMessage(message: String) {
         viewModelScope.launch {
             _messages.emit(message)
         }
